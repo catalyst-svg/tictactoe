@@ -10,7 +10,7 @@ class player
 {
 	const std::string m_name;
 public:
-	player(const std;:string name);
+	player(const std::string name);
 
 	void getName() const;
 };
@@ -23,7 +23,7 @@ public:
 	static void placement(int userRow, int userCol, char userS);
 };
 
-class board
+class game
 {
 public:
 	static bool play1;
@@ -31,9 +31,6 @@ public:
 	static bool winChecker(std::vector<std::vector<char>>& gameBoard,int rowChose,int colChose);
 };
 
-std::string name;
-bool whichTurn;
-bool isWinner;
 
 #endif
 

@@ -1,25 +1,18 @@
 #include "tictac.h"
  
-class player
-{
-    const std::string m_name;
-public:
-    player(const std::string name)
+player::player(const std::string name)
         :m_name(name)
-    {}
-    void getName() const
+{
+}
+
+void player::getName() const
     {
         std::cout << m_name;
     }
-};
- 
-class board
+
+void board::printBoard()
 {
-public:
-    static std::vector<std::vector<char>> board1;
-    static void printBoard()
-    {
-        for (auto i{0}; i < (int)board1.size(); i++)
+	for (auto i{0}; i < (int)board1.size(); i++)
         {
             for (auto x{0}; x < (int)board1[i].size(); x++)
             {
@@ -35,9 +28,10 @@ public:
                 std::cout << "---+---+---" << std::endl;
             }
         }
-    }
-    static void placement(int userRow, int userCol, char userS)
-    {
+}
+
+void board::placement(int userRow, int userCol, char userS)
+{
         if (board1[userRow - 1][userCol - 1] == '.')  // '.' as empty cell
         {
             board1[userRow - 1][userCol - 1] = userS;
@@ -46,20 +40,12 @@ public:
         {
             std::cout << "Already A Value Placed In That Square!" << std::endl;
         }
-    }
-};
- 
-std::vector<std::vector<char>> board::board1 = {{'.','.','.',},
-                                                 {'.','.','.',},
-                                                 {'.','.','.'}};
- 
-class game
+    
+}
+
+bool game::turnManager()
 {
-public:
-    static bool play1;
-    static bool turnManager()
-    {
-        if (play1)
+	if (play1)
         {
             play1 = false;
             return true;
@@ -69,10 +55,10 @@ public:
             play1 = true;
         }
         return false;
-    }
+}
  
-    static bool winChecker(std::vector<std::vector<char>>& gameBoard, int rowChose, int colChose)
-    {
+bool game::winChecker(std::vector<std::vector<char>>& gameBoard, int rowChose, int colChose)
+{
         bool rowTrue{true}, colTrue{true}, dLTrue{true}, dRTrue{true};
  
         // Row check
@@ -124,11 +110,13 @@ public:
         }
  
         return rowTrue || colTrue || dLTrue || dRTrue;
-    }
-};
+    
+}
  
 bool game::play1 = true;
- 
+std::vector<std::vector<char>> board::board1 = {{'.','.','.',},
+                                                 {'.','.','.',},
+                                                 {'.','.','.'}};
 int main()
 {
     const char p1S{'X'};
